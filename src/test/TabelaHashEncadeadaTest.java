@@ -73,4 +73,17 @@ public class TabelaHashEncadeadaTest {
        
 
     }
+
+    @Test
+    public void listandoTodosOsAlunos() throws ValidateException{
+        aluno = new Aluno(1,"test");
+        Aluno aluno2 = new Aluno(2, "novo teste");
+
+        hashTable = new TabelaHashEncadeada();
+
+        hashTable.put(aluno.getMatricula(), aluno);
+        hashTable.put(aluno2.getMatricula(), aluno2);
+
+        
+    }
 }
