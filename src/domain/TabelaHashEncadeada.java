@@ -58,6 +58,10 @@ public class TabelaHashEncadeada {
         return (tabela.length > 0);
     }
 
+    public int getSizeTable() {
+        return size;
+    }
+
     /**
      * Adiciona o par chave, valor na tabela.
      * 
@@ -74,17 +78,17 @@ public class TabelaHashEncadeada {
             this.tabela[hash] = alunos;
 
         } else {
-            for (int i = 0; i < alunos.size(); i++) {
+            for (int i = 0; i < tabela.length; i++) {
                 if (alunos.get(i).getMatricula() == chave) {
                     throw new ValidateException("Já existe aluno com o numero de matricula inserido");
-                } else {
-                    alunos.add(valor);
-                    this.tabela[hash] = alunos;
-                    return;
                 }
+                alunos.add(valor);
+                this.tabela[hash] = alunos;
+                return;
             }
-            alunos.add(valor);
+
         }
+
     }
 
     /**
@@ -117,36 +121,42 @@ public class TabelaHashEncadeada {
      * @param chave A matrícula do aluno a ser removido.
      * @return O aluno a ser removido. null caso não haja aluno com a matrícula
      *         passada como parâmetro.
+     * @throws ValidateException
      */
-    public Aluno remove(int chave) {
+    public Aluno remove(int chave) throws ValidateException {
         int hash = hash(chave);
         ArrayList<Aluno> alunos = this.tabela[hash];
-
-        Iterator<Aluno> it = alunos.iterator();
         Aluno atual = null;
 
-        while (it.hasNext()) {
-            atual = it.next();
-            if (atual.getMatricula().equals(chave)) {
-                it.remove();
-                return atual;
+        if (alunos != null) {
+            Iterator<Aluno> it = alunos.iterator();
+
+            while (it.hasNext()) {
+                atual = it.next();
+                if (atual.getMatricula().equals(chave)) {
+                    it.remove();
+                    return atual;
+                }
             }
+        }else{
+            throw new ValidateException("\n Parece que esse numero de matricula não existe \n");
         }
 
         return atual;
     }
 
     public void getAllStudents() {
-
-        while (size != 0) {
-            Aluno aluno = get(size);
-
+        ArrayList<Aluno>[] alunos = this.tabela;
+        System.out.println("\n================================");
+        for (ArrayList<Aluno> aluno : alunos) {
             if (aluno != null) {
-                System.out.println("|"+aluno.getMatricula()+"    "+aluno.getNome()+"\t|");
+                for (Aluno atual : aluno) {
+                    System.out.println(atual.getMatricula() + "\t" + atual.getNome());
+                }
             }
-            size--;
 
         }
+        System.out.println("================================");
 
     }
 

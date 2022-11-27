@@ -6,6 +6,10 @@ public class Aluno {
     private Integer matricula;
     private String nome;
     
+    
+    public Aluno() {
+    }
+
     public Aluno(Integer matricula, String nome) {
         this.matricula = matricula;
         this.nome = nome;
@@ -18,7 +22,15 @@ public class Aluno {
     public String getNome() {
         return nome;
     }
-    
+
+    public void setMatricula(Integer matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public int hashCode() {
         return this.matricula;
