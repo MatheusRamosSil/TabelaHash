@@ -80,7 +80,7 @@ public class App {
     }
 
     private static void logoBash() {
-        File arquivo = new File("Tabela hash/logoBash.txt");
+        File arquivo = new File("./src/logoBash.txt");
         try {
             FileReader arq = new FileReader(arquivo);
             BufferedReader lerArq = new BufferedReader(arq);
